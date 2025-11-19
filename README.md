@@ -1,4 +1,4 @@
-#Percolation
+# Percolation
 
 Princeton Algorithm Programming Assignment 1 Write a program to estimate the value of the percolationthreshold via Monte Carlo simulation.
 
