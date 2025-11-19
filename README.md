@@ -1,3 +1,5 @@
+#Percolation
+
 Princeton Algorithm Programming Assignment 1 Write a program to estimate the value of the percolationthreshold via Monte Carlo simulation.
 
 Percolation. Given a composite systems comprised ofrandomly distributed insulating and metallic materials: whatfraction of the materials need to be metallic so that the compositesystem is an electrical conductor? Given a porous landscape withwater on the surface (or oil below), under what conditions will thewater be able to drain through to the bottom (or the oil to gushthrough to the surface)? Scientists have defined an abstractprocess known aspercolation to model such situations.
