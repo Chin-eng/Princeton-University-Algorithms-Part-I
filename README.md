@@ -29,23 +29,23 @@ Linux
 Assessment Guide
 .
 
-# Final exam. 
+### Final exam. 
 (Sorry, Coursera did not migrate the final exam from the old platform.) The final exam is cumulative and designed to make sure you understand how each algorithm works and when it is effective. The final does not involve Java programming. Many of the questions will be based on questions from the exercises and in-lecture quizzes. You may attempt the final exam up to 3 times (your best score is recorded).
 
-# Job interview questions. 
+### Job interview questions. 
 Each week, we will also provide a few algorithmic job interview questions based on the material for the week, inspired by questions asked at leading technology companies. The questions are for self-enrichment and are not assessed; however, we will provide some hints and you are welcome to discuss solutions in the discussion forums with your classmates.
 
-# Discussion forums. 
+### Discussion forums. 
 Please be sure to make use of the discussion forums if you need help, and please contribute to the forums if you think that you can provide help. Such forums have proven to be an important and fun part of the online course experience.
 
-# Honor code. 
+### Honor code. 
 All students in the course must agree to abide by the Coursera 
 honor code. In particular, do not post solutions or partial solutions to programming assignments (including in the Discussion Forums or public code repositories such as GitHub); however, you are permitted to discuss general ideas and problem-solving approaches. You are also permitted to discuss solutions to exercises and job interview questions.
 
-#Copyright. 
+### Copyright. 
 All rights reserved. All video recordings, lecture slides, assessments and other materials made available in connection with this course are subject to copyright protection and may be used only for private study by persons who are enrolled in this course. Any other use of these materials must be with the express, written permission of Robert Sedgewick and Kevin Wayne.
 
 Certificates. No certificates, statements of accomplishment, or other credentials will be awarded in connection with this course.
 
-# Credits. 
+### Credits. 
 We are grateful to many for help in developing this course. We thank Daniel Kearns, Laura Shaddock, and Jeffrey Himpele for video production; Josh Hug for programming assignment infrastructure; Andrew Morrison for exercise infrastructure; and Jack Magill for migrating the programming assignment infrastructure to the new Coursera platform. We also thank Daphne Koller for inspiring us to teach a MOOC.
