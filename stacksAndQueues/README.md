@@ -96,8 +96,8 @@ Performance requirements.  Your randomized queue implementation must support eac
 ### Client.
 Write a client program Permutation.java that takes an integer k as a command-line argument; reads a sequence of strings from standard input using StdIn.readString(); and prints exactly k of them, uniformly at random. Print each item from the sequence at most once.
 
-[text](<../../../../../Desktop/Programming Assignment 2_ Queues.html>)
-![alt text](<Screenshot 2025-11-23 at 6.47.15 PM.png>)
+<img width="1091" height="589" alt="Screenshot 2025-11-23 at 6 49 55 PM" src="https://github.com/user-attachments/assets/bb1eaa96-e1cc-479a-9580-133d67c85802" />
+<img width="1091" height="589" alt="Screenshot 2025-11-23 at 6 49 47 PM" src="https://github.com/user-attachments/assets/a90e8413-db07-4515-9f02-a1fafd556f8c" />
 
 Your program must implement the following API:
 
