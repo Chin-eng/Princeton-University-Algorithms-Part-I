@@ -1,5 +1,4 @@
 import Percolation;
-package UnionFind;
 import edu.princeton.cs.algs4.StdRandom;
 import edu.princeton.cs.algs4.StdStats;
 
