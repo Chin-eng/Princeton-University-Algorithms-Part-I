@@ -1,4 +1,4 @@
-package stacksAndQueues;
+package DequesandRandomizedQueues;
 
 import java.util.Iterator;
 
