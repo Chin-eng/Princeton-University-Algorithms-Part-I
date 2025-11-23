@@ -1,5 +1,7 @@
 package stacksAndQueues;
 
+import java.util.Iterator;
+
 public class Deque<Item> implements Iterable<Item> {
 
     // construct an empty deque
@@ -33,7 +35,7 @@ public class Deque<Item> implements Iterable<Item> {
 
     // return an iterator over items in order from front to back
     public Iterator<Item> iterator(){
-        
+        return null;
     };
 
     // unit testing (required)
