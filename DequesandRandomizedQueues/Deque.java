@@ -1,5 +1,4 @@
 package DequesandRandomizedQueues;
-
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -34,9 +33,11 @@ public class Deque<Item> implements Iterable<Item> {
 
         if (size() == arr.length) {
             Item[] newArr = (Item[]) new Object[this.size * 2];
+
             for (int i = 0; i < this.arr.length; i++) {
-                newArr[i] = this.arr[head+i % this.arr.length];
+                newArr[i] = this.arr[(head+i) % this.arr.length];
             }
+
             this.arr = newArr;
             this.head = 0;
             this.tail = this.size;
@@ -58,7 +59,7 @@ public class Deque<Item> implements Iterable<Item> {
         if (size() == arr.length) {
             Item[] newArr = (Item[]) new Object[this.size * 2];
             for (int i = 0; i < this.arr.length; i++) {
-                newArr[i] = this.arr[head+i % this.arr.length];
+                newArr[i] = this.arr[(head+i) % this.arr.length];
             }
             this.arr = newArr;
             this.head = 0;
@@ -119,9 +120,26 @@ public class Deque<Item> implements Iterable<Item> {
             returnCount++;
             return item;
         }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
     }
 
     // unit testing (required)    
     public static void main(String[] args) {
+        Deque<String> d = new Deque<>();
+
+        d.addFirst("a");
+        d.addLast("b");
+        d.addFirst("c");
+        d.addLast("d");
+        
+        Iterator<String> itr = d.iterator();
+
+        while (itr.hasNext()) {
+            System.out.println(itr.next() + " ");
+        }
     }
 }
