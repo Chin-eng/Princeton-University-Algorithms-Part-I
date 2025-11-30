@@ -12,7 +12,7 @@ public class Deque<Item> implements Iterable<Item> {
         this.head = 0;
         this.tail = 0;
         this.size = 0;
-        this.arr = (Item[]) new Object[2];
+        this.arr = (Item[]) new Object[16];
     };
 
     // is the deque empty?
@@ -27,21 +27,8 @@ public class Deque<Item> implements Iterable<Item> {
 
     // add the item to the front
     public void addFirst(Item item){
-        if (item == null) { 
-            throw new IllegalArgumentException();
-        }
-
-        if (size() == arr.length) {
-            Item[] newArr = (Item[]) new Object[this.size * 2];
-
-            for (int i = 0; i < this.arr.length; i++) {
-                newArr[i] = this.arr[(head+i) % this.arr.length];
-            }
-
-            this.arr = newArr;
-            this.head = 0;
-            this.tail = this.size;
-        }
+        if (item == null) throw new IllegalArgumentException();
+        if (size() == arr.length) resizeArray(this.size * 2);
         if (this.head == 0) {
             this.head = (this.head - 1 + this.arr.length) % this.arr.length;
         } else {
@@ -51,20 +38,20 @@ public class Deque<Item> implements Iterable<Item> {
         this.size++;
     };
 
+    private void resizeArray(int newSize) {
+        Item[] newArr = (Item[]) new Object[newSize];
+        for (int i = 0; i < this.arr.length; i++) {
+            newArr[i] = this.arr[(head+i) % this.arr.length];
+        }
+        this.arr = newArr;
+        this.head = 0;
+        this.tail = this.size;
+    }
+
     // add the item to the back
     public void addLast(Item item) {
-        if (item == null) { 
-            throw new IllegalArgumentException();
-        }
-        if (size() == arr.length) {
-            Item[] newArr = (Item[]) new Object[this.size * 2];
-            for (int i = 0; i < this.arr.length; i++) {
-                newArr[i] = this.arr[(head+i) % this.arr.length];
-            }
-            this.arr = newArr;
-            this.head = 0;
-            this.tail = this.size;
-        }
+        if (item == null) throw new IllegalArgumentException();
+        if (size() == arr.length) resizeArray(2 * this.size);
         arr[tail] = item; 
         this.tail = ((this.tail + 1) % this.arr.length);
         this.size++;
@@ -101,7 +88,7 @@ public class Deque<Item> implements Iterable<Item> {
 
     private class myIterator implements Iterator<Item> {
         private int currentIndex = Deque.this.head;
-        private int capturedSize = Deque.this.size;
+        private int capturedSize = Deque.this.arr.length;
         private Item[] innerArray = Deque.this.arr;
         private int returnCount = 0;
 
@@ -112,9 +99,7 @@ public class Deque<Item> implements Iterable<Item> {
 
         @Override
         public Item next() {
-            if (returnCount == capturedSize) {
-                throw new NoSuchElementException();
-            }
+            if (returnCount == capturedSize) throw new NoSuchElementException();
             Item item = innerArray[currentIndex];
             currentIndex = (currentIndex + 1) % innerArray.length;
             returnCount++;
