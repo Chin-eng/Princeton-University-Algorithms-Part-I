@@ -2,7 +2,7 @@ package DequesandRandomizedQueues;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-import java.util.Random;
+import edu.princeton.cs.algs4.StdRandom;
 
 // import edu.princeton.cs.algs4.StdRandom;
 
@@ -35,8 +35,8 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     };
 
     private void resize(int newSize) {
-        Item[] newArr = (Item[]) new Object[this.arr.length * 2];
-        for (int i = 0; i < this.arr.length; i++) {
+        Item[] newArr = (Item[]) new Object[newSize];
+        for (int i = 0; i < this.size; i++) {
             newArr[i] = this.arr[i];
         }
         this.arr = newArr;
@@ -53,7 +53,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
         this.size--;
 
-        if (this.size == this.arr.length / 4) resize(this.arr.length/2);
+        if (this.size > 0 && this.size == this.arr.length / 4) resize(this.arr.length/2);
         return item;
     };
 
@@ -65,9 +65,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     private int randomIndex() {
-        Random random = new Random();
-        int randomIndex = random.nextInt(this.size);
-        return randomIndex;
+        return StdRandom.uniformInt(this.size);
     }
 
     // return an independent iterator over items in random order
@@ -76,15 +74,20 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     private class myIterator implements Iterator<Item> {
-        private Item[] temp = RandomizedQueue.this.arr;
+        private Item[] queue = RandomizedQueue.this.arr;
+        private Item[] temp;
         private int returnCount = 0;
-        private int capturedSize = RandomizedQueue.this.arr.length;
+        private int capturedSize = RandomizedQueue.this.size;
         private int currentIndex = 0;
 
         private myIterator() {
-            Random r = new Random();
-            for (int i = this.temp.length - 1; i > 0; i--) {
-                int j = r.nextInt(i+1);
+            this.temp = (Item[]) new Object[capturedSize];
+            for (int i = 0; i < this.capturedSize; i++) {
+                temp[i] = queue[i];
+            }
+
+            for (int i = capturedSize - 1; i > 0; i--) {
+                int j = StdRandom.uniformInt(i+1);
                 Item tempValue = this.temp[i];
                 this.temp[i] = this.temp[j];
                 this.temp[j] = tempValue;
@@ -123,7 +126,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         Iterator<String> itr = rq.iterator();
 
         while (itr.hasNext()) {
-             System.out.println(itr.next() + " " + itr.hasNext());
+             System.out.println(itr.next());
         }
     }
 }

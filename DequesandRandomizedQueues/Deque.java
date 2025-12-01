@@ -12,7 +12,7 @@ public class Deque<Item> implements Iterable<Item> {
         this.head = 0;
         this.tail = 0;
         this.size = 0;
-        this.arr = (Item[]) new Object[16];
+        this.arr = (Item[]) new Object[2];
     };
 
     // is the deque empty?
