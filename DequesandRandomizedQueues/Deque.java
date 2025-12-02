@@ -28,12 +28,8 @@ public class Deque<Item> implements Iterable<Item> {
     // add the item to the front
     public void addFirst(Item item){
         if (item == null) throw new IllegalArgumentException();
-        if (size() == arr.length) resizeArray(this.size * 2);
-        if (this.head == 0) {
-            this.head = (this.head - 1 + this.arr.length) % this.arr.length;
-        } else {
-            this.head--;
-        }
+        if (this.size == arr.length) resizeArray(this.size * 2);
+        this.head = (this.head - 1 + this.arr.length) % this.arr.length;
         arr[head] = item;
         this.size++;
     };
@@ -59,9 +55,7 @@ public class Deque<Item> implements Iterable<Item> {
 
     // remove and return the item from the front
     public Item removeFirst(){
-        if (this.size == 0) {
-            throw new NoSuchElementException();
-        }
+        if (this.size == 0) throw new NoSuchElementException();
         Item item = this.arr[this.head];
         this.arr[head] = null;
         this.head = (this.head + 1) % this.arr.length;
@@ -71,12 +65,11 @@ public class Deque<Item> implements Iterable<Item> {
 
     // remove and return the item from the back
     public Item removeLast(){
-        if (this.size == 0) {
-            throw new NoSuchElementException();
-        }
-        Item item = this.arr[this.tail];
-        this.arr[this.tail] = null;
-        this.tail = (this.tail - 1 + this.arr.length) % this.arr.length;
+        if (this.size == 0) throw new NoSuchElementException();
+        int lastIndex = (this.tail - 1 + this.arr.length) % this.arr.length;
+        Item item = this.arr[lastIndex];
+        this.arr[lastIndex] = null;
+        this.tail = lastIndex;
         this.size--; 
         return item;
     };
@@ -88,7 +81,7 @@ public class Deque<Item> implements Iterable<Item> {
 
     private class myIterator implements Iterator<Item> {
         private int currentIndex = Deque.this.head;
-        private int capturedSize = Deque.this.arr.length;
+        private int capturedSize = Deque.this.size;
         private Item[] innerArray = Deque.this.arr;
         private int returnCount = 0;
 
@@ -114,17 +107,20 @@ public class Deque<Item> implements Iterable<Item> {
 
     // unit testing (required)    
     public static void main(String[] args) {
-        Deque<String> d = new Deque<>();
+        Deque<Integer> d = new Deque<>();
 
-        d.addFirst("a");
-        d.addLast("b");
-        d.addFirst("c");
-        d.addLast("d");
-        
-        Iterator<String> itr = d.iterator();
+        d.addFirst(1);
+        d.addFirst(2);
+        d.addFirst(3);
+        d.addFirst(4);
+        d.addFirst(5);
+        d.removeLast();
+
+        Iterator<Integer> itr = d.iterator();
 
         while (itr.hasNext()) {
             System.out.println(itr.next() + " ");
         }
+
     }
 }
