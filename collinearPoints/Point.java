@@ -37,21 +37,25 @@ public class Point implements Comparable<Point>{
     if (this.x == that.x && this.y == that.y) return Double.NEGATIVE_INFINITY;
     if (this.y  == that.y) return 0.0;
     if (this.x == that.x) return Double.POSITIVE_INFINITY; 
-    return (that.y - this.y)/(that.x - this.x);
+    return ((double)that.y - this.y)/((double) that.x - this.x);
    }
 
    public Comparator<Point> slopeOrder() {
-    return null;
+    return (o1, o2) -> Double.compare(slopeTo(o1), slopeTo(o2));
    }
 
     public static void main(String[] args) {
-        Point p1 = new Point(0, 0);
-        Point p2 = new Point(1, 1);
+        Point p0 = new Point(1, 1);
+        Point p1 = new Point(348, 9);
+        Point p2 = new Point(290, 31);
 
-        System.out.println(p2.compareTo(p1));
-        Comparator<Point> slopeComparator = p1.slopeOrder();
+        System.out.println(p1.slopeTo(p2));
+        Comparator<Point> slopeComparator = p0.slopeOrder();
 
-        Point[] points = {p2, p1};
+        Point[] points = {p1, p2};
+        // System.out.println(Arrays.toString(points));
         Arrays.sort(points, slopeComparator);
+
+        // System.out.println(Arrays.toString(points));
     }
 }
