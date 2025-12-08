@@ -46,10 +46,11 @@ public class Point implements Comparable<Point>{
 
     public static void main(String[] args) {
         Point p0 = new Point(1, 1);
+        Point p3 = new Point(1, 1);
         Point p1 = new Point(348, 9);
         Point p2 = new Point(290, 31);
 
-        System.out.println(p1.slopeTo(p2));
+        System.out.println(p0.compareTo(p1));
         Comparator<Point> slopeComparator = p0.slopeOrder();
 
         Point[] points = {p1, p2};

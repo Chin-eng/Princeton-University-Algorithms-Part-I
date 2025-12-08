@@ -15,7 +15,7 @@ public class LineSegment {
     this.p = p;
     this.q = q;
    }       
-   public   void draw() {
+   public void draw() {
     p.drawTo(q);
    }                       
    public String toString() {
@@ -23,5 +23,5 @@ public class LineSegment {
    }
     public int hashCode() {
     throw new UnsupportedOperationException("hashCode() is not supported");
-    }                   
+   }                   
 }
