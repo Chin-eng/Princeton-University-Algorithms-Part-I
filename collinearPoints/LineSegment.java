@@ -19,7 +19,7 @@ public class LineSegment {
     p.drawTo(q);
    }                       
    public String toString() {
-    return p + " -> " + q;
+    return p + "->" + q;
    }
     public int hashCode() {
     throw new UnsupportedOperationException("hashCode() is not supported");
