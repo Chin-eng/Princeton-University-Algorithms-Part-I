@@ -9,16 +9,20 @@ public class BruteCollinearPoints {
     private List<LineSegment> segments;
 
     private Point[] sort(Point[] points) {
-        for (int i = 0; i < points.length-1; i++) {
-            for (int j = i + 1; j < points.length; j++) {
-                if (points[i].compareTo(points[j]) == 1) {
-                    Point temp = points[i];
-                    points[i] = points[j];
-                    points[j] = temp;
+        Point[] answer = new Point[points.length];
+        for (int i = 0; i < points.length; i++) {
+            answer[i] = points[i];
+        }
+        for (int i = 0; i < answer.length-1; i++) {
+            for (int j = i + 1; j < answer.length; j++) {
+                if (answer[i].compareTo(answer[j]) > 0) {
+                    Point temp = answer[i];
+                    answer[i] = answer[j];
+                    answer[j] = temp;
                 }
             }
         } 
-        return points;
+        return answer;
     }
 
     public BruteCollinearPoints(Point[] points) {
@@ -52,7 +56,9 @@ public class BruteCollinearPoints {
                             Point p0 = sorted_temp[0];
                             Point p3 = sorted_temp[3];
                             LineSegment segment = new LineSegment(p0, p3);
-                            segments.add(segment);
+                            if (!segments.contains(segment)) {
+                                segments.add(segment);
+                            }
                             numberOfSegments++;
                         }
                     }
