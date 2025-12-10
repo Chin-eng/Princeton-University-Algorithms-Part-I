@@ -1,5 +1,6 @@
 package collinearPoints;
 
+import java.util.ArrayList;
 // import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -69,6 +70,7 @@ public class FastCollinearPoints {
             }
         }
 
+        segments = new ArrayList<LineSegment>();
         for (int i = 0; i < points.length; i++) {
             Point[] freshcopy = freshCopy(points);
             Point p = freshcopy[i];
@@ -77,7 +79,7 @@ public class FastCollinearPoints {
             Comparator<Point> slopeComparator = p.slopeOrder();
             Arrays.sort(freshcopy, slopeComparator);            
             for (int j = 0; j < freshcopy.length; j++) {
-                this.run.clear();
+                run = new ArrayList<Point>();
                 int current = j;
                 int runStart = 0;
                 int runEnd = 0; 
