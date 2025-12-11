@@ -71,6 +71,7 @@ public class FastCollinearPoints {
         }
 
         segments = new ArrayList<LineSegment>();
+        run = new ArrayList<Point>();
         for (int i = 0; i < points.length; i++) {
             Point[] freshcopy = freshCopy(points);
             Point p = freshcopy[i];
@@ -79,7 +80,7 @@ public class FastCollinearPoints {
             Comparator<Point> slopeComparator = p.slopeOrder();
             Arrays.sort(freshcopy, slopeComparator);            
             for (int j = 0; j < freshcopy.length; j++) {
-                run = new ArrayList<Point>();
+                this.run.clear();
                 int current = j;
                 int runStart = 0;
                 int runEnd = 0; 
@@ -96,16 +97,20 @@ public class FastCollinearPoints {
 
                         minPoint = minPoint(run);
                         maxPoint = maxPoint(run);
+                        // System.out.println(minPoint);
+                        // System.out.println(maxPoint);
 
                         LineSegment segment = new LineSegment(minPoint, maxPoint);
                         
-                        if (!segments.contains(segment)) {
-                            segments.add(segment);
+                        if (p == minPoint && !this.segments.contains(segment)) {
+                            this.segments.add(segment);
+                            this.numberOfSegments++;
                         }
-                        numberOfSegments++;
+                        // System.out.println(this.segments);
                     }
-                     current++;
+                    current++;
                 }
+                // System.out.println(this.run);
             }
         }
         
@@ -139,7 +144,22 @@ public class FastCollinearPoints {
 
         Point[] points = {p0,p1,p2,p3,p4,p5};
         FastCollinearPoints fast = new FastCollinearPoints(points);
-        // System.out.println(fast.numberOfSegments());
+        System.out.println(fast.numberOfSegments());
+
+        LineSegment segment = new LineSegment(p5, p1);
+        List<LineSegment> segments = new ArrayList<LineSegment>();
+
+        // System.out.println(segments);
+        // segments.add(segment);
+        // System.out.println(segments);
+        // System.out.println(segments.contains(segment));
+        
+
+
+
+
+        // segments.add();
+
 
     }
     
