@@ -9,7 +9,6 @@ import java.util.List;
 public class FastCollinearPoints {
     private int numberOfSegments;
     private List<LineSegment> segments;
-    private List<Point> run;
 
     private Point[] sort(Point[] points) {
         Point[] answer = new Point[points.length];
@@ -55,6 +54,17 @@ public class FastCollinearPoints {
         }
         return max;
     }
+
+    private List<Point> getRun(Point p, int start, int end, Point[] array) {
+        List<Point> run = new ArrayList<Point>();
+        run.add(p);
+        int i = start;
+        while (i < end) {
+            run.add(array[i]);
+            i++;
+        }
+        return run;
+    }
     
     public FastCollinearPoints(Point[] points) {
         if (points == null) throw new IllegalArgumentException();
@@ -71,53 +81,34 @@ public class FastCollinearPoints {
         }
 
         segments = new ArrayList<LineSegment>();
-        run = new ArrayList<Point>();
         for (int i = 0; i < points.length; i++) {
             Point[] freshcopy = freshCopy(points);
             Point p = freshcopy[i];
-            Point minPoint = p;
-            Point maxPoint = p;
             Comparator<Point> slopeComparator = p.slopeOrder();
-            Arrays.sort(freshcopy, slopeComparator);            
-            for (int j = 0; j < freshcopy.length; j++) {
-                this.run.clear();
-                int current = j;
-                int runStart = 0;
-                int runEnd = 0; 
-                this.run.add(p);
-                while (current < freshcopy.length-1 && p.slopeTo(freshcopy[current]) == p.slopeTo(freshcopy[current+1])) {
-                    runEnd++;
-                    if (!this.run.contains(freshcopy[current])) {
-                        this.run.add(freshcopy[current]);
-                    }
-                    if (!this.run.contains(freshcopy[current+1])) {
-                        this.run.add(freshcopy[current+1]);
-                    }
-                    if ((runEnd - runStart + 1) >= 3) {
+            Arrays.sort(freshcopy, slopeComparator);
+            // System.out.println(Arrays.toString(freshcopy));
 
-                        minPoint = minPoint(run);
-                        maxPoint = maxPoint(run);
-                        // System.out.println(minPoint);
-                        // System.out.println(maxPoint);
-
-                        LineSegment segment = new LineSegment(minPoint, maxPoint);
-                        
-                        if (p == minPoint && !this.segments.contains(segment)) {
-                            this.segments.add(segment);
-                            this.numberOfSegments++;
-                        }
-                        // System.out.println(this.segments);
-                    }
-                    current++;
+            int start = 1;
+            while (start < freshcopy.length) {
+                int end = start + 1;  
+                while (end < freshcopy.length && p.slopeTo(freshcopy[start]) == p.slopeTo(freshcopy[end])) {
+                    end++;
                 }
-                // System.out.println(this.run);
+                int runLength = (end - start) + 1;
+                if (runLength >= 4) {
+                    List<Point> run = getRun(p, start, end, freshcopy);
+                    
+                    Point minPoint = minPoint(run);
+                    Point maxPoint = maxPoint(run);
+                    if (p == minPoint) {
+                        LineSegment segment = new LineSegment(minPoint, maxPoint);
+                        this.segments.add(segment);
+                        this.numberOfSegments++;
+                    }
+                }
+                start = end;
             }
         }
-        
-        // System.out.println(Arrays.toString(points));
-        // Point[] slope_sorted = slopeSort(points);
-        // System.out.println(Arrays.toString(slope_sorted));
-
     }  
     public int numberOfSegments() {
         return this.numberOfSegments;
@@ -125,12 +116,9 @@ public class FastCollinearPoints {
 
     public LineSegment[] segments() {
         LineSegment[] answer = new LineSegment[this.numberOfSegments];
-        
         for (int i = 0; i < answer.length; i++) {
             answer[i] = this.segments.get(i);
         }
-        // System.out.println(answer);
-
         return answer;
     } 
     
@@ -145,21 +133,6 @@ public class FastCollinearPoints {
         Point[] points = {p0,p1,p2,p3,p4,p5};
         FastCollinearPoints fast = new FastCollinearPoints(points);
         System.out.println(fast.numberOfSegments());
-
-        LineSegment segment = new LineSegment(p5, p1);
-        List<LineSegment> segments = new ArrayList<LineSegment>();
-
-        // System.out.println(segments);
-        // segments.add(segment);
-        // System.out.println(segments);
-        // System.out.println(segments.contains(segment));
-        
-
-
-
-
-        // segments.add();
-
 
     }
     
